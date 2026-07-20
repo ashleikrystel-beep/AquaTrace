@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News | AquaTrace</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="news_style.css">
+</head>
+<body>
+
+
+ <!-- Sidebar -->
+    <aside class="adminbar" id="sidebar">
+        <div class="adminbar-title">
+            <a href="#" class="navbar-brand">
+                <img src="images/— AQUATRACE —.png" alt="AquaTrace Logo" class="logo-img">
+                <span class="logo-text">AQUATRACE</span>
+            </a>
+        </div>
+
+        <nav>
+            <a href="{{ route('admin.dashboard.index') }}" class="adminnav" data-label="Dashboard">
+                <i class="fas fa-tachometer-alt"></i> <span class="sidebar-text">Dashboard</span>
+            </a>
+            <a href="{{ route('news.html') }}" class="adminnav active" data-label="News">
+                <i class="fas fa-news-alt"></i> <span class="sidebar-text">News</span>
+            </a>
+            <a href="{{ route('admin.ports.index') }}" class="adminnav" data-label="Ports">
+                <i class="fas fa-anchor"></i> <span class="sidebar-text">Ports</span>
+            </a>
+            <a href="{{ route('admin.users.index')}}" class="adminnav" data-label="Users">
+                <i class="fas fa-user"></i> <span class="sidebar-text">Users</span>
+            </a>
+            <a href="{{ route('admin.vessels.index') }}" class="adminnav" data-label="Vessels">
+                <i class="fas fa-ship"></i> <span class="sidebar-text">Vessels</span>
+            </a>
+            <a href="{{ route('admin.reports.index') }}" class="adminnav" data-label="Reports">
+                <i class="fas fa-chart-bar"></i> <span class="sidebar-text">Reports</span>
+            </a>
+            <a href="admin_about.html" class="adminnav" data-label="About">
+                <i class="fas fa-info-circle"></i> <span class="sidebar-text">About</span>
+            </a>
+        </nav>
+
+        <div class="logout-btn">
+            <a href="{{ route('logout') }}" data-label="Logout">
+                <i class="fas fa-sign-out-alt"></i> <span class="sidebar-text">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Topbar -->
+    <header class="adminheader">
+        <div class="d-flex align-items-center w-100">
+            <button class="btn btn-outline-secondary me-2" id="toggle-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h5 class="welcometext mb-0">Welcome, Admin!</h5>
+        </div>
+    </header>
+
+<!-- MAIN CONTENT -->
+<main class="admin-body">
+<div class="container-fluid">
+
+
+<!-- ADD NEWS CARD -->
+<div class="card shadow-sm p-0 mb-4 border-0" style="border-radius: 12px;">
+
+     <!-- Blue header -->
+    <div class="section-header">
+        <h4 class="section-title mb-0">Add News</h4>
+    </div>
+
+    <!-- Card Body -->
+    <div class="p-4">
+        <form id="addNewsForm">
+
+            <div class="mb-3">
+                <label class="form-label">Event</label>
+                <input type="text" class="form-control" id="newsTitle" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="news-date">Date</label>
+                <input type="date" class="form-control" id="newsDate" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="4" id="newsContent" required></textarea>
+            </div>
+
+            <div class="mb-3">
+               <label class="form-label">Status</label>
+                    <select class="form-select" id="status" required>
+                        <option value="port">Port Operations</option>
+                        <option value="safety">Safety Alert</option>
+                        <option value="tech">Technology</option>
+                        <option value="report">Incident Report</option>
+                        <option value="dev">Development</option>
+                        <option value="environment">Environment</option>
+                    </select>
+            </div>
+
+            <button class="btn btn-primary px-4" type="submit">Publish</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- RECENT NEWS LIST -->
+<div class="card shadow-sm p-0 mb-4 border-0" style="border-radius: 12px;">
+    
+    <!-- Blue header -->
+    <div class="section-header">
+        <h4 class="section-title mb-0">Recently Added News</h4>
+    </div>
+
+        <!-- Card body -->
+    <div class="p-1">
+        <div id="newsList" class="row g-3"></div>
+    </div>
+
+</div>
+
+
+</div>
+</main>
+
+
+<script>
+// Sidebar toggle
+document.getElementById("toggle-btn").addEventListener("click", function () {
+    document.getElementById("sidebar").classList.toggle("collapsed");
+});
+
+// FORM & LIST
+const form = document.getElementById('addNewsForm');
+const newsList = document.getElementById('newsList');
+
+// Status Color Mapping
+const statusColors = {
+    port: "primary",       // Blue
+    safety: "primary",      // Red
+    tech: "primary",          // Light Blue
+    report: "primary",     // Yellow
+    dev: "primary",      // Gray
+    environment: "primary" // Green
+};
+
+// DATE FORMATTER
+function formatDate(value) {
+    const date = new Date(value);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Get values
+    const title = document.getElementById('newsTitle').value;
+    const date = document.getElementById('newsDate').value;
+    const content = document.getElementById('newsContent').value;
+    const status = document.getElementById('status').value;
+
+    const formattedDate = formatDate(date);
+    const badgeColor = statusColors[status] || "primary";
+
+    // Create card
+    const card = document.createElement('div');
+    card.className = 'col-md-4';
+
+    card.innerHTML = `
+        <div class="event-card shadow-sm p-3 mb-3"
+            style="border-radius: 15px; background: linear-gradient(135deg, #ffffff, #e8f0ff);">
+
+            <h5 class="fw-bold mb-1">${title}</h5>
+            <span class="badge bg-${badgeColor} mb-2">Published: ${formattedDate}</span>
+
+            <p class="text-secondary">
+                ${content}
+            </p>
+
+            <span class="badge bg-dark">${status.toUpperCase()}</span>
+        </div>
+    `;
+
+    // Add to top of "Recently Added News"
+    newsList.prepend(card);
+
+    // Clear form
+    form.reset();
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTrace | Vessel Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="registerboat_style.css">
+</head>
+
+<body>
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h4>Menu</h4>
+      <div class="sidebar-close" id="sidebarClose">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li><a href="web_user.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="vessel_user.html"><i class="fas fa-ship"></i> Vessels</a></li>
+      <li><a href="ports_user.html"><i class="fas fa-anchor"></i> Ports</a></li>
+      <li><a href="news_user.html"><i class="fas fa-newspaper"></i> News</a></li>
+      <hr class="sidebar-divider">
+      <li><a href="registerboat.html"><i class="fas fa-ship"></i> Register Boat</a></li>
+      <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+      <li><a href="about_user.html"><i class="fas fa-info-circle"></i> About</a></li>
+      <li><a href="contact_user.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      <hr class="sidebar-divider">
+      <li><a href="loginsignup.html" class="logout-item"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+    </ul>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="web_user.html">
+        <img src="images/— AQUATRACE —.png" alt="AquaTrace" height="40" loading="eager">
+        <p>AQUATRACE</p>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto d-none d-lg-flex">
+          <li class="nav-item"><a class="nav-link" href="web_user.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="vessel_user.html">VESSELS</a></li>
+          <li class="nav-item"><a class="nav-link" href="ports_user.html">PORTS</a></li>
+          <li class="nav-item"><a class="nav-link" href="news_user.html">NEWS</a></li>
+        </ul>
+
+        <div class="d-flex">
+          <div class="user-profile-btn" id="sidebarToggle">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container text-center">
+      <h1><i class="fas fa-ship"></i> Registered Vessels</h1>
+      <p>Track and manage all registered vessels in the AquaTrace system</p>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="form-container" id="formContainer">
+      <form id="vesselForm">
+        <!-- Basic Information Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <i class="fas fa-info-circle"></i>
+            </div>
+            <h3>Basic Information</h3>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-tag"></i> Vessel Name *
+              </label>
+              <input type="text" class="form-control" id="vesselName" placeholder="Enter vessel name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-hash"></i> IMO Number *
+              </label>
+              <input type="text" class="form-control" id="imoNumber" placeholder="IMO1234567" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-broadcast"></i> MMSI Number *
+              </label>
+              <input type="text" class="form-control" id="mmsiNumber" placeholder="123456789" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-telephone"></i> Call Sign *
+              </label>
+              <input type="text" class="form-control" id="callSign" placeholder="ABC123" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vessel Specifications Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3>Vessel Specifications</h3>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-layers"></i> Vessel Type *
+              </label>
+              <select class="form-select" id="vesselType" required>
+                <option value="">Select vessel type</option>
+                <option value="Cargo">Cargo</option>
+                <option value="Passenger">Passenger</option>
+                <option value="Tanker">Tanker</option>
+                <option value="Fishing">Fishing</option>
+                <option value="Tug">Tug</option>
+                <option value="Yacht">Yacht</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-flag"></i> Flag State *
+              </label>
+              <select class="form-select" id="flagState" required>
+                <option value="">Select flag state</option>
+                <option value="Philippines">Philippines</option>
+                <option value="Panama">Panama</option>
+                <option value="Liberia">Liberia</option>
+                <option value="Marshall Islands">Marshall Islands</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">
+                <i class="bi bi-rulers"></i> Length Overall (LOA) *
+              </label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="loa" placeholder="0.0" step="0.1" required>
+                <span class="input-group-text">meters</span>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">
+                <i class="bi bi-box"></i> Gross Tonnage *
+              </label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="grossTonnage" placeholder="0" required>
+                <span class="input-group-text">GT</span>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">
+                <i class="bi bi-calendar-event"></i> Year Built *
+              </label>
+              <input type="number" class="form-control" id="yearBuilt" placeholder="YYYY" min="1900" max="2025"
+                required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">
+                <i class="bi bi-card-text"></i> Additional Notes
+              </label>
+              <textarea class="form-control" id="additionalNotes" rows="4"
+                placeholder="Any additional information about the vessel"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="bi bi-check-circle"></i> Register Vessel
+          </button>
+          <button type="button" class="btn-cancel" id="cancelBtn" style="display:none;">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Custom Success Modal -->
+    <div class="custom-modal-overlay" id="successModal">
+      <div class="custom-modal-content">
+        <div class="custom-modal-body">
+          <div class="success-icon-modal mb-4">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          <h3 class="mb-3" id="modalTitle">Vessel Registered Successfully!</h3>
+          <p class="text-muted mb-4" id="modalMessage">Your vessel has been added to the AquaTrace system.</p>
+          <button type="button" class="btn-modal-close" id="closeModalBtn">
+            <i class="bi bi-check-lg"></i> Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registered Vessels -->
+    <div class="boats-list" id="vesselsList">
+      <div class="list-header">
+        <h5><i class="bi bi-card-list"></i> Registered Vessels</h5>
+        <div class="vessel-count" id="vesselCount">0 Vessels</div>
+      </div>
+      <div id="vesselsContainer">
+        <div class="empty-state">
+          <i class="bi bi-inbox"></i>
+          <p>No vessels registered yet. Register your first vessel above!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <nav class="footer-nav">
+          <ul>
+            <li><a href="#">VESSELS</a></li>
+            <li><a href="#">PORTS</a></li>
+            <li><a href="#">ANALYTICS</a></li>
+            <li><a href="#">TRACKING</a></li>
+            <li><a href="#">NEWS</a></li>
+          </ul>
+        </nav>
+
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+        <div class="footer-links">
+          <a href="#">CONTACT</a>
+          <a href="#">API DOCS</a>
+          <a href="#">SUPPORT</a>
+          <a href="#">PRIVACY</a>
+          <a href="#">TERMS</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          REAL-TIME VESSEL TRACKING, CRAFTED WITH ⚓ IN THE MARITIME INDUSTRY<br>
+          ©<span class="footer-brand">AQUATRACE</span> | ALL RIGHTS RESERVED
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ==================== SIDEBAR & NAVBAR ====================
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    document.getElementById('sidebarToggle').onclick = () => {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeSidebar = () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    document.getElementById('sidebarClose').onclick = closeSidebar;
+    overlay.onclick = closeSidebar;
+
+    window.onscroll = () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    };
+
+    // ==================== VESSEL MANAGEMENT ====================
+    let vessels = [];
+    let editId = null;
+
+    const vesselForm = document.getElementById('vesselForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const successModal = document.getElementById('successModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    // Close modal function
+    function closeModal() {
+      successModal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    closeModalBtn.onclick = closeModal;
+    successModal.onclick = (e) => {
+      if (e.target === successModal) closeModal();
+    };
+
+    // Update vessel count
+    function updateVesselCount() {
+      const countElement = document.getElementById('vesselCount');
+      const count = vessels.length;
+      countElement.textContent = `${count} Vessel${count !== 1 ? 's' : ''}`;
+    }
+
+    vesselForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const fields = ['vesselName', 'imoNumber', 'mmsiNumber', 'callSign', 'vesselType', 'flagState',
+        'loa', 'grossTonnage', 'yearBuilt'];
+
+      let valid = true;
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value) {
+          el.style.borderColor = '#dc3545';
+          valid = false;
+        } else {
+          el.style.borderColor = '';
+        }
+      });
+
+      if (!valid) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      const data = {
+        id: editId || Date.now(),
+        name: document.getElementById('vesselName').value,
+        imo: document.getElementById('imoNumber').value,
+        mmsi: document.getElementById('mmsiNumber').value,
+        callSign: document.getElementById('callSign').value,
+        type: document.getElementById('vesselType').value,
+        flag: document.getElementById('flagState').value,
+        loa: document.getElementById('loa').value,
+        grossTonnage: document.getElementById('grossTonnage').value,
+        yearBuilt: document.getElementById('yearBuilt').value,
+        additionalNotes: document.getElementById('additionalNotes').value
+      };
+
+      if (editId) {
+        const index = vessels.findIndex(v => v.id === editId);
+        vessels[index] = data;
+        document.getElementById('modalTitle').textContent = 'Vessel Updated Successfully!';
+        document.getElementById('modalMessage').textContent = `${data.name} has been updated in the AquaTrace system.`;
+      } else {
+        vessels.push(data);
+        document.getElementById('modalTitle').textContent = 'Vessel Registered Successfully!';
+        document.getElementById('modalMessage').textContent = `${data.name} has been added to the AquaTrace system.`;
+      }
+
+      // Reset form and render vessels
+      resetForm();
+      renderVessels();
+
+      // Show custom modal
+      successModal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function renderVessels() {
+      const container = document.getElementById('vesselsContainer');
+      updateVesselCount();
+
+      if (vessels.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="bi bi-inbox"></i>
+            <p>No vessels registered yet. Register your first vessel above!</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = vessels.map(v => `
+        <div class="card">
+          <div class="card-body d-flex align-items-center">
+            <i class="bi bi-ship" style="font-size: 2.5rem; margin-right: 20px; color: #667eea;"></i>
+            <div class="boat-info">
+              <h6 class="mb-2">${v.name}</h6>
+              <small class="text-muted d-block mb-1"><strong>IMO:</strong> ${v.imo} | <strong>MMSI:</strong> ${v.mmsi} | <strong>Call Sign:</strong> ${v.callSign}</small>
+              <small class="text-muted d-block mb-1"><strong>Type:</strong> ${v.type} | <strong>Flag:</strong> ${v.flag}</small>
+              <small class="text-muted d-block"><strong>LOA:</strong> ${v.loa}m | <strong>GT:</strong> ${v.grossTonnage} | <strong>Built:</strong> ${v.yearBuilt}</small>
+            </div>
+            <button class="btn-edit" onclick="editVessel(${v.id})" title="Edit vessel">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn-delete" onclick="deleteVessel(${v.id})" title="Delete vessel">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function editVessel(id) {
+      const v = vessels.find(x => x.id === id);
+      if (!v) return;
+
+      editId = id;
+      document.getElementById('vesselName').value = v.name;
+      document.getElementById('imoNumber').value = v.imo;
+      document.getElementById('mmsiNumber').value = v.mmsi;
+      document.getElementById('callSign').value = v.callSign;
+      document.getElementById('vesselType').value = v.type;
+      document.getElementById('flagState').value = v.flag;
+      document.getElementById('loa').value = v.loa;
+      document.getElementById('grossTonnage').value = v.grossTonnage;
+      document.getElementById('yearBuilt').value = v.yearBuilt;
+      document.getElementById('additionalNotes').value = v.additionalNotes;
+
+      submitBtn.innerHTML = '<i class="bi bi-check-circle"></i> Update Vessel';
+      cancelBtn.style.display = 'inline-block';
+
+      document.getElementById('formContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function deleteVessel(id) {
+      if (!confirm('Are you sure you want to delete this vessel?')) return;
+
+      vessels = vessels.filter(v => v.id !== id);
+
+      if (editId === id) {
+        resetForm();
+      }
+
+      renderVessels();
+    }
+
+    function resetForm() {
+      vesselForm.reset();
+      editId = null;
+      submitBtn.innerHTML = '<i class="bi bi-check-circle"></i> Register Vessel';
+      cancelBtn.style.display = 'none';
+
+      document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.style.borderColor = '';
+      });
+    }
+
+    cancelBtn.addEventListener('click', resetForm);
+
+    // Initialize
+    renderVessels();
+  </script>
+
+</body>
+
+</html>

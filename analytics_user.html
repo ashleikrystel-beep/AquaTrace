@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTrace | Analytics Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="analyticsuser_style.css">
+
+</head>
+
+<body>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h4>Menu</h4>
+      <div class="sidebar-close" id="sidebarClose">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li><a href="web_user.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="vessel_user.html"><i class="fas fa-ship"></i> Vessels</a></li>
+      <li><a href="ports_user.html"><i class="fas fa-anchor"></i> Ports</a></li>
+      <li><a href="news_user.html"><i class="fas fa-newspaper"></i> News</a></li>
+      <hr class="sidebar-divider">
+      <li><a href="registerboat.html"><i class="fas fa-ship"></i> Register Boat</a></li>
+      <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+      <li><a href="analytics_user.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+      <hr class="sidebar-divider">
+      <li><a href="about_user.html"><i class="fas fa-info-circle"></i> About</a></li>
+      <li><a href="contact_user.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      <hr class="sidebar-divider">
+      <li><a href="loginsignup.html" class="logout-item"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+    </ul>
+  </div>
+
+  <!-- NAVIGATION BARs-->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" data-aos="fade-down" data-aos-duration="1000">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="web_user.html">
+        <img src="images/— AQUATRACE —.png" alt="AquaTrace" height="40" loading="eager">
+        <p>AQUATRACE</p>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Desktop Navigation Links (hidden on mobile) -->
+        <ul class="navbar-nav mx-auto d-none d-lg-flex">
+          <li class="nav-item"><a class="nav-link" href="web_user.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="vessel_user.html">VESSELS</a></li>
+          <li class="nav-item"><a class="nav-link" href="ports_user.html">PORTS</a></li>
+          <li class="nav-item"><a class="nav-link" href="news_user.html">NEWS</a></li>
+          <li class="nav-item"><a class="nav-link" href="analytics_user.html">ANALYTICS</a></li>
+        </ul>
+
+        <!-- Profile Icon -->
+        <div class="d-flex">
+          <div class="user-profile-btn" id="sidebarToggle">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ANALYTICS HEADER -->
+  <section class="analytics-header" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+      <h1>ANALYTICS DASHBOARD</h1>
+      <p>Real-time maritime data and incident reports</p>
+    </div>
+  </section>
+
+  <!-- CHARTS SECTION -->
+  <section class="charts-section">
+    <div class="container">
+      <div class="row">
+
+        <!-- Bar Chart - Monthly Incidents -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="chart-card">
+            <h3 class="chart-title">
+              <i class="fas fa-chart-bar me-2"></i>Monthly Incident Reports
+            </h3>
+            <div class="chart-container">
+              <canvas id="incidentChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie Chart - Vessel Types -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="chart-card">
+            <h3 class="chart-title">
+              <i class="fas fa-ship me-2"></i>Vessel Types Distribution
+            </h3>
+            <div class="chart-container pie-chart">
+              <canvas id="vesselChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PORT STATISTICS -->
+  <section class="port-stats-section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Port Vessel Statistics</h2>
+
+      <!-- First Row - 6 Ports -->
+      <div class="row justify-content-center port-row-first">
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Sasa Wharf</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Daliao</h3>
+            <div class="port-count">32</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Maco</h3>
+            <div class="port-count">18</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Panabo</h3>
+            <div class="port-count">12</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Sta. Ana</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Tibungco</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Row - 5 Ports (Centered) -->
+      <div class="row justify-content-center port-row-second">
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Mati Wharf</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Babak</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Mae Wess</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Banay-Banay</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="port-card">
+            <div class="port-icon">
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3 class="port-name">Davao Fishport</h3>
+            <div class="port-count">47</div>
+            <p class="port-label">Vessels Anchored</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCIDENT REPORTS TABLE -->
+  <section class="incident-reports-section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Recent Incident Reports</h2>
+
+      <div class="incident-table" data-aos="fade-up" data-aos-delay="200">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Vessel Name</th>
+                <th>Owner/User</th>
+                <th>Port Location</th>
+                <th>Incident Type</th>
+                <th>Severity</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Oct 10, 2025</td>
+                <td>MV Pacific Star</td>
+                <td>Juan Dela Cruz</td>
+                <td>Sasa Wharf</td>
+                <td>Minor Collision</td>
+                <td><span class="severity-badge severity-medium">Medium</span></td>
+                <td>Resolved</td>
+              </tr>
+              <tr>
+                <td>Oct 8, 2025</td>
+                <td>SS Ocean Breeze</td>
+                <td>Maria Santos</td>
+                <td>Banay-Banay</td>
+                <td>Engine Failure</td>
+                <td><span class="severity-badge severity-high">High</span></td>
+                <td>Under Investigation</td>
+              </tr>
+              <tr>
+                <td>Oct 5, 2025</td>
+                <td>MV Coral Trader</td>
+                <td>Pedro Garcia</td>
+                <td>Sta. Ana</td>
+                <td>Equipment Malfunction</td>
+                <td><span class="severity-badge severity-low">Low</span></td>
+                <td>Resolved</td>
+              </tr>
+              <tr>
+                <td>Oct 3, 2025</td>
+                <td>SS Manila Express</td>
+                <td>Ana Reyes</td>
+                <td>Sasa Wharf</td>
+                <td>Navigation Error</td>
+                <td><span class="severity-badge severity-low">Low</span></td>
+                <td>Resolved</td>
+              </tr>
+              <tr>
+                <td>Sep 28, 2025</td>
+                <td>MV Mindanao Pride</td>
+                <td>Roberto Cruz</td>
+                <td>Panabo</td>
+                <td>Weather-Related Delay</td>
+                <td><span class="severity-badge severity-medium">Medium</span></td>
+                <td>Closed</td>
+              </tr>
+              <tr>
+                <td>Sep 25, 2025</td>
+                <td>SS Island Hopper</td>
+                <td>Carmen Bautista</td>
+                <td>Tibungco</td>
+                <td>Cargo Handling Issue</td>
+                <td><span class="severity-badge severity-low">Low</span></td>
+                <td>Resolved</td>
+              </tr>
+              <tr>
+                <td>Sep 22, 2025</td>
+                <td>MV Southern Star</td>
+                <td>Jose Mendoza</td>
+                <td>Maco</td>
+                <td>Communication Failure</td>
+                <td><span class="severity-badge severity-medium">Medium</span></td>
+                <td>Resolved</td>
+              </tr>
+              <tr>
+                <td>Sep 18, 2025</td>
+                <td>SS Visayan Queen</td>
+                <td>Linda Fernandez</td>
+                <td>Sasa Wharf</td>
+                <td>Oil Spill (Minor)</td>
+                <td><span class="severity-badge severity-high">High</span></td>
+                <td>Closed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- FOOTER -->
+  <footer class="footer" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+      <div class="footer-top">
+        <nav class="footer-nav" data-aos="fade-up" data-aos-delay="200">
+          <ul>
+            <li><a href="#">VESSELS</a></li>
+            <li><a href="#">PORTS</a></li>
+            <li><a href="#">ANALYTICS</a></li>
+            <li><a href="#">TRACKING</a></li>
+            <li><a href="#">NEWS</a></li>
+          </ul>
+        </nav>
+
+        <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+        <div class="footer-links" data-aos="fade-up" data-aos-delay="600">
+          <a href="#">CONTACT</a>
+          <a href="#">API DOCS</a>
+          <a href="#">SUPPORT</a>
+          <a href="#">PRIVACY</a>
+          <a href="#">TERMS</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom" data-aos="fade-up" data-aos-delay="800">
+      <div class="container">
+        <p>
+          REAL-TIME VESSEL TRACKING, CRAFTED WITH ⚓ IN THE MARITIME INDUSTRY<br>
+          ©<span class="footer-brand">AQUATRACE</span> | ALL RIGHTS RESERVED
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap + AOS + Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+
+    // Sidebar functionality
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
+
+    function openSidebar() {
+      sidebar.classList.add('active');
+      sidebarOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      sidebarOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Bar Chart - Monthly Incident Reports
+    const incidentCtx = document.getElementById('incidentChart').getContext('2d');
+    const incidentChart = new Chart(incidentCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+        datasets: [{
+          label: 'Number of Incidents',
+          data: [12, 8, 15, 10, 18, 14, 9, 11, 16, 13],
+          backgroundColor: 'rgba(74, 158, 255, 0.8)',
+          borderColor: '#4a9eff',
+          borderWidth: 2,
+          borderRadius: 8,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              font: {
+                family: 'Poppins',
+                size: 14,
+                weight: '600'
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(26, 35, 50, 0.95)',
+            titleFont: {
+              family: 'Poppins',
+              size: 14,
+              weight: '600'
+            },
+            bodyFont: {
+              family: 'Poppins',
+              size: 13
+            },
+            padding: 12,
+            borderColor: '#4a9eff',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              font: {
+                family: 'Poppins',
+                size: 12
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            ticks: {
+              font: {
+                family: 'Poppins',
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    });
+
+    // Pie Chart - Vessel Types
+    const vesselCtx = document.getElementById('vesselChart').getContext('2d');
+    const vesselChart = new Chart(vesselCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Cargo Ships', 'Tankers', 'Fishing Vessels', 'Passenger Ships', 'Other'],
+        datasets: [{
+          data: [35, 28, 18, 12, 7],
+          backgroundColor: [
+            '#4a9eff',
+            '#0066cc',
+            '#bde0e8',
+            '#1a2332',
+            '#7fb3d5'
+          ],
+          borderWidth: 3,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              font: {
+                family: 'Poppins',
+                size: 13,
+                weight: '500'
+              },
+              padding: 15,
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(26, 35, 50, 0.95)',
+            titleFont: {
+              family: 'Poppins',
+              size: 14,
+              weight: '600'
+            },
+            bodyFont: {
+              family: 'Poppins',
+              size: 13
+            },
+            padding: 12,
+            borderColor: '#4a9eff',
+            borderWidth: 1,
+            callbacks: {
+              label: function (context) {
+                let label = context.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                label += context.parsed + ' vessels';
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

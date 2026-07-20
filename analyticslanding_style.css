@@ -1,0 +1,427 @@
+/* ------------------ GLOBAL RESET ------------------ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: url(images/AQUATRACE1.png) no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Background overlay for dim effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* ------------------ NAVBAR ------------------ */
+.navbar {
+  background: transparent !important;
+  transition: background 0.3s ease;
+  z-index: 1000;
+  padding: 0.5rem 0 !important;
+  min-height: 70px;
+  max-height: 70px;
+}
+
+/* Navbar background after scrolling */
+.navbar.scrolled {
+  background: #1a2332f2 !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Brand text */
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.navbar-brand p {
+  margin: 0 0 0 10px !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #eaeff3;
+}
+
+/* Nav links with hover underline */
+.navbar .nav-link {
+  color: #eaeff3 !important;
+  margin: 0 12px;
+  font-weight: 500;
+  font-size: large;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar .btn {
+  border-radius: 20px;
+  padding: 4px 15px;
+}
+
+/* Dropdown on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+  background: rgba(26, 35, 50, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Dropdown items */
+.dropdown-item {
+  color: #eaeff3;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: #4a9eff;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+/* ------------------ ANALYTICS HEADER ------------------ */
+.analytics-header {
+  padding: 150px 0 60px;
+  text-align: center;
+  color: white;
+}
+
+.analytics-header h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.analytics-header p {
+  font-size: 1.2rem;
+  color: #bde0e8;
+}
+
+/* ------------------ CHARTS SECTION ------------------ */
+.charts-section {
+  padding: 40px 0;
+}
+
+.chart-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.chart-card:hover {
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.4);
+}
+
+.chart-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a2332;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* Chart container size */
+.chart-container {
+  position: relative;
+  height: 400px;
+}
+
+/* Pie chart alignment */
+.chart-container.pie-chart {
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ------------------ PORT STATISTICS ------------------ */
+.port-stats-section {
+  padding: 40px 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Port grid layout */
+.port-row-first,
+.port-row-second {
+  margin-bottom: 20px;
+}
+
+/* Port cards */
+.port-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.port-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.4);
+}
+
+/* Port icons */
+.port-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #4a9eff 0%, #0066cc 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 30px;
+  color: white;
+}
+
+/* Port labels and data */
+.port-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a2332;
+}
+
+.port-count {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #4a9eff;
+}
+
+.port-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ------------------ INCIDENT REPORTS ------------------ */
+.incident-reports-section {
+  padding: 40px 0 100px;
+}
+
+.incident-table {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+}
+
+.table {
+  margin: 0;
+}
+
+.table thead th {
+  background: #1a2332;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  padding: 15px;
+}
+
+.table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(74, 158, 255, 0.1);
+}
+
+.table tbody td {
+  padding: 15px;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Severity color badges */
+.severity-badge {
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.severity-high {
+  background: #ff4444;
+  color: white;
+}
+.severity-medium {
+  background: #ffbb33;
+  color: white;
+}
+.severity-low {
+  background: #00c851;
+  color: white;
+}
+
+/* ------------------ FOOTER ------------------ */
+.footer {
+  background: #1a2332;
+  color: #ffffff;
+  padding: 30px 0 0;
+}
+
+.footer-top {
+  border-bottom: 1px solid rgba(189, 224, 232, 0.2);
+  padding-bottom: 5px;
+}
+
+.footer-nav {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Footer navigation links */
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: #4a9eff;
+}
+
+/* Social media icons */
+.social-links {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  background: #4a9eff;
+  border-radius: 50%;
+  color: white;
+  line-height: 45px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #0066cc;
+  transform: translateY(-3px);
+}
+
+/* Footer links */
+.footer-links {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.footer-links a {
+  color: #bde0e8;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+/* Footer bottom text */
+.footer-bottom {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #bde0e8;
+}
+
+.footer-brand {
+  color: #4a9eff;
+  font-weight: 600;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  .analytics-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+
+  .footer-nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTrace | Analytics Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="analyticslanding_style.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+    <div class="container">
+      <!-- Logo and Brand Name -->
+      <a class="navbar-brand d-flex align-items-center" href="web_landing.html">
+        <img src="images/— AQUATRACE —.png" alt="AquaTrace" height="40" loading="eager">
+        <p>AQUATRACE</p>
+      </a>
+
+      <!-- Mobile Menu Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="web_landing.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="ports_landing.html">PORTS</a></li>
+          <li class="nav-item"><a class="nav-link" href="news_landing.html">NEWS</a></li>
+
+          <!-- Dropdown Menu -->
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" data-bs-toggle="dropdown">ABOUT</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="about_landing.html">ABOUT US</a></li>
+              <li><a class="dropdown-item" href="contact_landing.html">CONTACT</a></li>
+              <li><a class="dropdown-item" href="analytics_landing.html">ANALYTICS</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Sign Up / Log In Buttons -->
+        <div class="d-flex">
+          <a href="loginsignup.html" class="btn btn-outline-light btn-sm">LOG IN</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>
+      <i class="fas fa-chart-line"></i>
+      ANALYTICS DASHBOARD
+    </h1>
+    <p>Real-time maritime data and fleet insights</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Tab Navigation -->
+    <div class="tab-navigation">
+      <button class="tab-btn active" onclick="switchTab('overview')">
+        <i class="fas fa-globe"></i> Overview
+      </button>
+      <button class="tab-btn" onclick="switchTab('fleet')">
+        <i class="fas fa-ship"></i> Fleet Insights
+      </button>
+    </div>
+
+    <!-- Overview Tab -->
+    <div id="overview" class="tab-content active">
+      <!-- Public Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fas fa-ship stat-icon"></i>
+            <i class="fas fa-chart-line stat-badge"></i>
+          </div>
+          <div class="stat-number">120</div>
+          <div class="stat-label">Total Vessels Tracked</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fas fa-compass stat-icon"></i>
+            <div class="pulse"></div>
+          </div>
+          <div class="stat-number">87</div>
+          <div class="stat-label">Active Vessels</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fas fa-map-marker-alt stat-icon"></i>
+            <i class="fas fa-arrow-trend-up stat-badge"></i>
+          </div>
+          <div class="stat-number">11</div>
+          <div class="stat-label">Total Ports</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fas fa-id-card stat-icon"></i>
+            <i class="fas fa-user stat-badge"></i>
+          </div>
+          <div class="stat-number">46</div>
+          <div class="stat-label">Total Users</div>
+        </div>
+      </div>
+
+      <!-- Vessel Categories -->
+      <div class="chart-card">
+        <h3 class="chart-title">
+          <i class="fas fa-pie-chart"></i>
+          VESSEL CATEGORIES
+        </h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="category-item">
+              <div class="category-header">
+                <span class="category-name">Cargo Ships</span>
+                <span class="category-count">42 vessels</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 35%; background: #4a9eff;"></div>
+              </div>
+              <div class="category-percentage" style="color: #4a9eff;">35%</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="category-item">
+              <div class="category-header">
+                <span class="category-name">Tankers</span>
+                <span class="category-count">30 vessels</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 25%; background: #0066cc;"></div>
+              </div>
+              <div class="category-percentage" style="color: #0066cc;">25%</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="category-item">
+              <div class="category-header">
+                <span class="category-name">Passenger Vessels</span>
+                <span class="category-count">24 vessels</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 20%; background: #003d7a;"></div>
+              </div>
+              <div class="category-percentage" style="color: #003d7a;">20%</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="category-item">
+              <div class="category-header">
+                <span class="category-name">Fishing Boats</span>
+                <span class="category-count">24 vessels</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 20%; background: #66b3ff;"></div>
+              </div>
+              <div class="category-percentage" style="color: #66b3ff;">20%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Section -->
+      <div class="map-container my-4">
+        <h2 class="text-center mb-3"><i class="fas fa-map-marker-alt"></i> PORTS OF DAVAO REGION</h2>
+        <div id="map"></div>
+      </div>
+
+      <!-- Ports Table -->
+      <div class="table-section">
+        <h3 class="chart-title">
+          <i class="fas fa-ship"></i>
+          PORTS IN DAVAO REGION
+        </h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th><i class="fas fa-map-marker-alt"></i>Ports</th>
+              <th><i class="fas fa-ship"></i>No. of Vessels</th>
+              <th><i class="fas fa-location-dot"></i>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sasa Wharf</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Davao City, Davao del Sur</td>
+            </tr>
+            <tr>
+              <td>Daliao (Anchorage)</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Davao City, Davao del Sur</td>
+            </tr>
+            <tr>
+              <td>Maco (Anchorage)</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Maco, Davao de Oro</td>
+            </tr>
+            <tr>
+              <td>Panabo (Anchorage)</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Panabo City, Davao del Norte</td>
+            </tr>
+            <tr>
+              <td>Sta. Ana (Anchorage)</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Davao City, Davao del Sur</td>
+            </tr>
+            <tr>
+              <td>OTP Mati Wharf</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Mati City, Davao Oriental</td>
+            </tr>
+            <tr>
+              <td>OTP Babak</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>IGACOS, Davao del Norte</td>
+            </tr>
+            <tr>
+              <td>OTP Mae Wess</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>IGACOS, Davao del Norte</td>
+            </tr>
+            <tr>
+              <td>Banay-Banay</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Banay-Banay, Davao Oriental</td>
+            </tr>
+            <tr>
+              <td>Davao Fishport</td>
+              <td><span class="vessel-badge">19</span></td>
+              <td>Davao City, Davao del Sur</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fleet Insights Tab -->
+    <div id="fleet" class="tab-content">
+      <!-- Fleet Status -->
+      <div class="fleet-grid">
+        <div class="fleet-card green">
+          <div class="fleet-header">
+            <i class="fas fa-compass fleet-icon green"></i>
+            <div class="fleet-stats">
+              <div class="fleet-number">72</div>
+              <div class="fleet-percentage">60%</div>
+            </div>
+          </div>
+          <div class="fleet-title">Vessels Underway</div>
+          <div class="fleet-subtitle">Currently in transit</div>
+        </div>
+
+        <div class="fleet-card orange">
+          <div class="fleet-header">
+            <i class="fas fa-anchor fleet-icon orange"></i>
+            <div class="fleet-stats">
+              <div class="fleet-number">48</div>
+              <div class="fleet-percentage">40%</div>
+            </div>
+          </div>
+          <div class="fleet-title">Vessels Anchored</div>
+          <div class="fleet-subtitle">Currently at ports</div>
+        </div>
+      </div>
+
+      <!-- Top 5 Busiest Ports -->
+      <div class="port-ranking">
+        <h3 class="chart-title">
+          <i class="fas fa-trophy"></i>
+          TOP 5 BUSIEST PORTS TODAY
+        </h3>
+
+        <div class="port-item">
+          <div class="port-left">
+            <div class="port-rank">1</div>
+            <div class="port-info">
+              <h4>Sasa Wharf</h4>
+              <p>45 vessels today</p>
+            </div>
+          </div>
+          <div class="port-right">
+            <div class="port-vessels">45</div>
+            <div class="port-trend">+12%</div>
+          </div>
+        </div>
+
+        <div class="port-item">
+          <div class="port-left">
+            <div class="port-rank">2</div>
+            <div class="port-info">
+              <h4>Daliao Anchorage</h4>
+              <p>38 vessels today</p>
+            </div>
+          </div>
+          <div class="port-right">
+            <div class="port-vessels">38</div>
+            <div class="port-trend">+8%</div>
+          </div>
+        </div>
+
+        <div class="port-item">
+          <div class="port-left">
+            <div class="port-rank">3</div>
+            <div class="port-info">
+              <h4>OTP Mati Wharf</h4>
+              <p>32 vessels today</p>
+            </div>
+          </div>
+          <div class="port-right">
+            <div class="port-vessels">32</div>
+            <div class="port-trend">+15%</div>
+          </div>
+        </div>
+
+        <div class="port-item">
+          <div class="port-left">
+            <div class="port-rank">4</div>
+            <div class="port-info">
+              <h4>Panabo Anchorage</h4>
+              <p>28 vessels today</p>
+            </div>
+          </div>
+          <div class="port-right">
+            <div class="port-vessels">28</div>
+            <div class="port-trend">+5%</div>
+          </div>
+        </div>
+
+        <div class="port-item">
+          <div class="port-left">
+            <div class="port-rank">5</div>
+            <div class="port-info">
+              <h4>Davao Fishport</h4>
+              <p>24 vessels today</p>
+            </div>
+          </div>
+          <div class="port-right">
+            <div class="port-vessels">24</div>
+            <div class="port-trend">+10%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily Movement Trends -->
+      <div class="chart-card">
+        <h3 class="chart-title">
+          <i class="fas fa-chart-line"></i>
+          DAILY VESSEL MOVEMENT TRENDS
+        </h3>
+        <div class="movement-grid">
+          <div class="movement-card blue">
+            <div class="movement-number">156</div>
+            <div class="movement-label">Arrivals Today</div>
+          </div>
+          <div class="movement-card green">
+            <div class="movement-number">142</div>
+            <div class="movement-label">Departures Today</div>
+          </div>
+          <div class="movement-card purple">
+            <div class="movement-number">87</div>
+            <div class="movement-label">Currently Active</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">HOME</a>
+        <a href="#">PORTS</a>
+        <a href="#">NEWS</a>
+        <a href="#">ABOUT US</a>
+        <a href="#">CONTACT</a>
+      </div>
+
+      <div class="social-icons">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>REAL-TIME VESSEL TRACKING, CRAFTED WITH ⚓ IN THE MARITIME INDUSTRY</p>
+        <p>© <span class="footer-brand">AQUATRACE</span> | ALL RIGHTS RESERVED</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- JavaScript -->
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function () {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Tab switching function
+    function switchTab(tabName) {
+      // Hide all tab contents
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Remove active class from all buttons
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected tab content
+      document.getElementById(tabName).classList.add('active');
+
+      // Add active class to clicked button
+      event.target.classList.add('active');
+
+      // Scroll to top of content
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Animate progress bars on load
+    window.addEventListener('load', function () {
+      const progressBars = document.querySelectorAll('.progress-bar-fill');
+      progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 300);
+      });
+
+      // Initialize map
+      initMap();
+    });
+
+    // Initialize Map
+    function initMap() {
+      try {
+        var map = L.map('map').setView([7.0, 125.5], 9);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Port icon (blue anchors)
+        var portIcon = L.divIcon({
+          className: 'custom-marker port-marker',
+          html: '<div style="background: rgba(255,255,255,0.9); border-radius: 50%; padding: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"><i class="fas fa-anchor" style="font-size: 24px; color: #007bff;"></i></div>',
+          iconSize: [40, 40],
+          iconAnchor: [20, 20]
+        });
+
+        // Add ports
+        L.marker([7.1270, 125.6621], { icon: portIcon }).addTo(map).bindPopup('<b>Sasa Wharf</b><br>Davao City, Davao del Sur');
+        L.marker([7.0091, 125.5047], { icon: portIcon }).addTo(map).bindPopup('<b>Daliao (Anchorage)</b><br>Davao City, Davao del Sur');
+        L.marker([7.3490, 125.8544], { icon: portIcon }).addTo(map).bindPopup('<b>Maco (Anchorage)</b><br>Maco, Davao de Oro');
+        L.marker([7.2968, 125.7131], { icon: portIcon }).addTo(map).bindPopup('<b>Panabo (Anchorage)</b><br>Panabo City, Davao del Norte');
+        L.marker([7.1282, 125.6637], { icon: portIcon }).addTo(map).bindPopup('<b>Sta. Ana (Anchorage)</b><br>Davao City, Davao del Sur');
+        L.marker([6.9511, 126.0088], { icon: portIcon }).addTo(map).bindPopup('<b>OTP Mati Wharf</b><br>Mati City, Davao Oriental');
+        L.marker([7.5167, 125.7833], { icon: portIcon }).addTo(map).bindPopup('<b>OTP Babak</b><br>IGACOS, Davao del Norte');
+        L.marker([7.5267, 125.7933], { icon: portIcon }).addTo(map).bindPopup('<b>OTP Mae Wess</b><br>IGACOS, Davao del Norte');
+        L.marker([7.0667, 126.0833], { icon: portIcon }).addTo(map).bindPopup('<b>Banay-Banay</b><br>Banay-Banay, Davao Oriental');
+        L.marker([7.0731, 125.6128], { icon: portIcon }).addTo(map).bindPopup('<b>Davao Fishport</b><br>Davao City, Davao del Sur');
+
+        // Fix map rendering
+        setTimeout(function () {
+          map.invalidateSize();
+        }, 100);
+      } catch (error) {
+        console.error('Map initialization error:', error);
+      }
+    }
+  </script>
+
+</body>
+
+</html>

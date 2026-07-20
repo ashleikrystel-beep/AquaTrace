@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | AquaTrace</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="adminbar" id="sidebar">
+  <div class="adminbar-title">
+    <a href="#" class="navbar-brand">
+      <img src="images/— AQUATRACE —.png" alt="AquaTrace Logo" class="logo-img">
+      <span class="logo-text">AQUATRACE</span>
+    </a>
+  </div>
+
+  <nav>
+    <a href="dashboard.html" class="adminnav active" data-label="Dashboard">
+      <i class="fas fa-tachometer-alt"></i> <span class="sidebar-text">Dashboard</span>
+    </a>
+    <a href="ports_admin.html" class="adminnav" data-label="Ports">
+      <i class="fas fa-anchor"></i> <span class="sidebar-text">Ports</span>
+    </a>
+    <a href="users_admin.html" class="adminnav" data-label="Users">
+      <i class="fas fa-user"></i> <span class="sidebar-text">Users</span>
+    </a>
+    <a href="vessel_admin.html" class="adminnav" data-label="Vessels">
+      <i class="fas fa-ship"></i> <span class="sidebar-text">Vessels</span>
+    </a>
+    <a href="reports_admin.html" class="adminnav" data-label="Reports">
+      <i class="fas fa-chart-bar"></i> <span class="sidebar-text">Reports</span>
+    </a>
+    <a href="about_admin.html" class="adminnav" data-label="About">
+      <i class="fas fa-info-circle"></i> <span class="sidebar-text">About</span>
+    </a>
+  </nav>
+
+  <div class="logout-btn">
+    <a href="loginsignup.html" data-label="Logout">
+      <i class="fas fa-sign-out-alt"></i> <span class="sidebar-text">Logout</span>
+    </a>
+  </div>
+</aside>
+
+
+<!-- Topbar -->
+<header class="adminheader">
+  <div class="d-flex align-items-center w-100">
+    <button class="btn btn-outline-secondary me-2" id="toggle-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <h5 class="welcometext mb-0">Welcome, Admin!</h5>
+
+   <!-- Notification Bell -->
+  <div class="notif-container">
+    <button id="notifBell">
+      <i class="fas fa-bell"></i>
+      <span id="notifBadge" class="d-none">0</span>
+    </button>
+
+    <!-- Notification Dropdown -->
+    <div id="notifDropdown">
+      <div class="notif-header">
+        <h6>Notifications</h6>
+        <button class="clear-all-btn" id="clearAllBtn">Clear All</button>
+      </div>
+      <div id="notifList">
+        <div class="empty-state">
+          <i class="fas fa-bell-slash"></i>
+          <p>No new notifications</p>
+  </div>
+  <div id="toastMessage" class="toast-message"></div>
+</div>
+</header>
+
+<!-- Main -->
+<main class="admin-body">
+
+  <!-- Stats -->
+   <div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <a href="admin_vessel.php" class="text-decoration-none">
+      <div class="card admin-card shadow-sm text-center py-3">
+        <div class="card-body">
+          <i class="fas fa-ship fa-2x mb-2" style="color: #0b3a67;"></i>
+          <div class="text-dark-emphasis small">Vessels</div>
+          <h5>50</h5>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <a href="admin_ports.php" class="text-decoration-none">
+      <div class="card admin-card shadow-sm text-center py-3">
+        <div class="card-body">
+          <i class="fas fa-map-pin fa-2x mb-2" style="color: #0b3a67;"></i>
+          <div class="text-dark-emphasis small">Ports</div>
+          <h5>13</h5>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <a href="admin_users.php" class="text-decoration-none">
+      <div class="card admin-card shadow-sm text-center py-3">
+        <div class="card-body">
+          <i class="fas fa-users fa-2x mb-2" style="color: #0b3a67;"></i>
+          <div class="text-dark-emphasis small">Users</div>
+          <h5>40</h5>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <a href="reports_admin.html" class="text-decoration-none">
+      <div class="card admin-card shadow-sm text-center py-3">
+        <div class="card-body bg-white">
+          <i class="fas fa-file-lines fa-2x mb-2" style="color: #0b3a67;"></i>
+          <div class="text-dark-emphasis small">Reports</div>
+          <h5>10</h5>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Map -->
+<div class="card shadow-sm ">
+  <div class="card-header d-flex text-center text-white bg-primary">
+    <h5 class="mb-0 fw-bold">MINDANAO MAP</h5>
+  </div>
+  <div class="card-body position-relative">
+    <div id="map"></div>
+  </div>
+</div>
+<br><br>
+<!-- Registered Vessels (Moved Below Map) -->
+<div class="card shadow-sm">
+  <div class="card-header d-flex justify-content-between align-items-center text-white bg-primary">
+    <h5 class="mb-0 fw-bold">REGISTERED VESSELS</h5>
+  </div>
+
+<div class="card-body"> <br>
+    <div id="vesselList"></div>
+  </div>
+</div>
+</main> 
+
+<!-- Add Vessel Modal -->
+<div class="modal fade" id="addVesselModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #06326a;">
+        <h5 class="modal-title">Add New Vessel</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addVesselForm">
+          <input type="hidden" id="vesselLat">
+          <input type="hidden" id="vesselLng">
+          <div class="mb-3">
+            <label class="form-label">Vessel Name</label>
+            <input type="text" class="form-control" id="vesselName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" class="form-control" id="vesselWhere" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Type</label>
+            <input type="text" class="form-control" id="vesselType" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Extra Info</label>
+            <input type="text" class="form-control" id="vesselExtra">
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn text-white" style="background-color: #06326a;">Add Vessel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // Sidebar toggle
+  document.getElementById("toggle-btn").addEventListener("click", function () {
+    document.getElementById("sidebar").classList.toggle("collapsed");
+  });
+
+ // ============ NOTIFICATION SYSTEM (MOVED TO GLOBAL SCOPE) ============
+  // Sample user data for demo
+  const sampleUsers = [
+    { name: 'Aira Rocel Nazareno', email: 'airarocel@email.com' },
+    { name: 'Ruzzel Mae Padrones', email: 'ruzzelmae@email.com' },
+    { name: 'Ashlei Krystel Panes', email: 'ashleikrystel@email.com' },
+    { name: 'Elena Mae Mendoza', email: 'elenamae@email.com' },
+  ];
+
+  let notifications = [];
+
+  // Elements
+  const notifBell = document.getElementById('notifBell');
+  const notifDropdown = document.getElementById('notifDropdown');
+  const notifBadge = document.getElementById('notifBadge');
+  const notifList = document.getElementById('notifList');
+  const clearAllBtn = document.getElementById('clearAllBtn');
+  const toastMessage = document.getElementById('toastMessage');
+
+  // Toggle dropdown
+  notifBell.addEventListener('click', (e) => {
+    e.stopPropagation();
+    notifDropdown.classList.toggle('show');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!notifDropdown.contains(e.target) && e.target !== notifBell) {
+      notifDropdown.classList.remove('show');
+    }
+  });
+
+  // Add notification
+  function addNotification() {
+    const user = sampleUsers[Math.floor(Math.random() * sampleUsers.length)];
+    const notification = {
+      id: Date.now(),
+      user: user.name,
+      email: user.email,
+      time: 'Just now'
+    };
+    
+    notifications.unshift(notification);
+    updateNotificationUI();
+    showToast('New registration request received!', 'success');
+  }
+
+  // Update notification UI
+  function updateNotificationUI() {
+    // Update badge
+    if (notifications.length > 0) {
+      notifBadge.textContent = notifications.length;
+      notifBadge.classList.remove('d-none');
+    } else {
+      notifBadge.classList.add('d-none');
+    }
+
+    // Update list
+    if (notifications.length === 0) {
+      notifList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-bell-slash"></i>
+          <p>No new notifications</p>
+        </div>
+      `;
+      return;
+    }
+
+    notifList.innerHTML = notifications.map(notif => `
+      <div class="notif-item" data-id="${notif.id}">
+        <div class="notif-icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <div class="notif-content">
+          <div class="notif-user">${notif.user}</div>
+          <div class="notif-message">${notif.email}</div>
+          <div class="notif-time">${notif.time}</div>
+        </div>
+        <div class="notif-actions">
+          <button class="action-btn accept-btn" onclick="acceptUser(${notif.id})">
+            <i class="fas fa-check"></i>
+          </button>
+          <button class="action-btn decline-btn" onclick="declineUser(${notif.id})">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Accept user
+  function acceptUser(id) {
+    const notif = notifications.find(n => n.id === id);
+    if (notif) {
+      notifications = notifications.filter(n => n.id !== id);
+      updateNotificationUI();
+      showToast(`${notif.user} has been accepted!`, 'success');
+      
+      // Here you would typically make an API call to accept the user
+      console.log('Accepting user:', notif);
+    }
+  }
+
+  // Decline user
+  function declineUser(id) {
+    const notif = notifications.find(n => n.id === id);
+    if (notif) {
+      notifications = notifications.filter(n => n.id !== id);
+      updateNotificationUI();
+      showToast(`${notif.user} has been declined.`, 'error');
+      
+      // Here you would typically make an API call to decline the user
+      console.log('Declining user:', notif);
+    }
+  }
+
+  // Clear all notifications
+  clearAllBtn.addEventListener('click', () => {
+    if (notifications.length > 0) {
+      notifications = [];
+      updateNotificationUI();
+      showToast('All notifications cleared', 'success');
+    }
+  });
+
+  // Show toast message
+  function showToast(message, type) {
+    toastMessage.textContent = message;
+    toastMessage.className = `toast-message toast-${type} show`;
+    
+    setTimeout(() => {
+      toastMessage.classList.remove('show');
+    }, 3000);
+  }
+
+  // Make functions globally accessible
+  window.acceptUser = acceptUser;
+  window.declineUser = declineUser;
+
+  // Initial UI update
+  updateNotificationUI();
+
+  // Auto-add demo notifications every 10 seconds (optional - remove if not needed)
+  setInterval(() => {
+    if (notifications.length < 5) { // Limit to 5 notifications
+      addNotification();
+    }
+  }, 10000);
+
+  // ============ MAP AND VESSEL SYSTEM ============
+  var map = L.map('map').setView([7.1907, 125.4553], 7);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    minZoom: 6,
+    maxZoom: 18,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var vessels = [];
+  var vesselList = document.getElementById("vesselList");
+
+  function addVessel(name, where, type, extra, lat, lng) {
+    var marker = L.marker([lat, lng])
+      .addTo(map)
+      .bindPopup("<b>" + name + "</b><br>" + where + "<br>");
+
+    var vessel = { name, where, type, extra, lat, lng, marker };
+    vessels.push(vessel);
+
+    var card = document.createElement("div");
+    card.className = "vessel-card shadow-sm";
+    card.innerHTML = `
+      <h5 class="mb-1">${name}</h5>
+      <p class="mb-1"><strong> Current location:</strong> ${where}</p>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-sm btn-outline-primary me-2">View</button>
+        <button class="btn btn-sm btn-outline-primary me-2">Delete</button>
+      </div>
+    `;
+    document.getElementById("vesselList").appendChild(card);
+  }
+
+  map.on('click', function(e) {
+    document.getElementById("vesselLat").value = e.latlng.lat;
+    document.getElementById("vesselLng").value = e.latlng.lng;
+    var addModal = new bootstrap.Modal(document.getElementById("addVesselModal"));
+    addModal.show();
+  });
+
+  document.getElementById("addVesselForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    var name = document.getElementById("vesselName").value.trim();
+    var where = document.getElementById("vesselWhere").value.trim();
+    var type = document.getElementById("vesselType").value.trim();
+    var extra = document.getElementById("vesselExtra").value.trim() || "N/A";
+    var lat = parseFloat(document.getElementById("vesselLat").value);
+    var lng = parseFloat(document.getElementById("vesselLng").value);
+
+    addVessel(name, where, type, extra, lat, lng);
+
+    var addModal = bootstrap.Modal.getInstance(document.getElementById("addVesselModal"));
+    addModal.hide();
+    e.target.reset();
+  });
+
+  // Demo vessels
+  addVessel("Vessel A", "Davao Gulf", "Fishing Boat", "Capacity: 30 tons", 7.0920, 125.6330);
+  addVessel("Vessel B", "Samal Island", "Passenger Ferry", "Status: Active", 7.1417, 125.7097);
+  addVessel("Vessel C", "Mati", "Cargo Ship", "Last updated: Today", 6.9556, 126.2167);
+</script>
+
+</body>
+</html>

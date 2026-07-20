@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaTrace | Submit Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="reportsuser_style.css">
+</head>
+
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Menu</h4>
+            <div class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="web_user.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="vessel_user.html"><i class="fas fa-ship"></i> Vessels</a></li>
+            <li><a href="ports_user.html"><i class="fas fa-anchor"></i> Ports</a></li>
+            <li><a href="news_user.html"><i class="fas fa-newspaper"></i> News</a></li>
+            <hr class="sidebar-divider">
+            <li><a href="registerboat.html"><i class="fas fa-ship"></i> Register Boat</a></li>
+            <li><a href="reports_user.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+            <li><a href="about_user.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="contact_user.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <hr class="sidebar-divider">
+            <li><a href="loginsignup.html" class="logout-item"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="web_user.html">
+                <img src="images/— AQUATRACE —.png" alt="AquaTrace" height="40" loading="eager">
+                <p>AQUATRACE</p>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto d-none d-lg-flex">
+                    <li class="nav-item"><a class="nav-link" href="web_user.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vessel_user.html">VESSELS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ports_user.html">PORTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news_user.html">NEWS</a></li>
+                </ul>
+
+                <div class="d-flex">
+                    <div class="user-profile-btn" id="sidebarToggle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container text-center">
+            <h1><i class="fas fa-file-alt"></i> Submit Incident Report</h1>
+            <p>Report maritime incidents and track their status</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Report Submission Form -->
+        <div class="form-container" id="formContainer">
+            <form id="reportForm">
+                <!-- Report Information Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <h3>Incident Details</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-calendar-event"></i> Incident Date *
+                            </label>
+                            <input type="date" class="form-control" id="incidentDate" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-clock"></i> Incident Time *
+                            </label>
+                            <input type="time" class="form-control" id="incidentTime" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-ship"></i> Vessel Involved *
+                            </label>
+                            <select class="form-select" id="vesselName" required>
+                                <option value="">Select vessel</option>
+                                <option value="MT Ocean Titan">MT Ocean Titan</option>
+                                <option value="SS Wave Rider">SS Wave Rider</option>
+                                <option value="MV Princess 21">MV Princess 21</option>
+                                <option value="MV Blue Horizon">MV Blue Horizon</option>
+                                <option value="MV Sea Voyager">MV Sea Voyager</option>
+                                <option value="MV Aurora">MV Aurora</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-geo-alt"></i> Port Location *
+                            </label>
+                            <select class="form-select" id="portLocation" required>
+                                <option value="">Select port</option>
+                                <option value="Sasa Wharf">Sasa Wharf</option>
+                                <option value="Daliao">Daliao</option>
+                                <option value="Maco">Maco</option>
+                                <option value="Panabo">Panabo</option>
+                                <option value="Sta. Ana">Sta. Ana</option>
+                                <option value="Tibungco">Tibungco</option>
+                                <option value="OTP Mati Wharf">OTP Mati Wharf</option>
+                                <option value="OTP Babak">OTP Babak</option>
+                                <option value="OTP Mae Wess">OTP Mae Wess</option>
+                                <option value="Banay-Banay">Banay-Banay</option>
+                                <option value="Davao Fish Port">Davao Fish Port</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-tag"></i> Incident Type *
+                            </label>
+                            <select class="form-select" id="incidentType" required>
+                                <option value="">Select incident type</option>
+                                <option value="Collision">Collision</option>
+                                <option value="Grounding">Grounding</option>
+                                <option value="Engine Failure">Engine Failure</option>
+                                <option value="Fire">Fire</option>
+                                <option value="Oil Spill">Oil Spill</option>
+                                <option value="Equipment Malfunction">Equipment Malfunction</option>
+                                <option value="Weather Damage">Weather Damage</option>
+                                <option value="Personnel Injury">Personnel Injury</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-exclamation-triangle"></i> Severity Level *
+                            </label>
+                            <select class="form-select" id="severity" required>
+                                <option value="">Select severity</option>
+                                <option value="LOW">Low - Minor incident</option>
+                                <option value="MEDIUM">Medium - Moderate incident</option>
+                                <option value="HIGH">High - Severe incident</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-card-text"></i> Incident Description *
+                        </label>
+                        <textarea class="form-control" id="description" rows="5"
+                            placeholder="Provide detailed description of the incident..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <i class="bi bi-send"></i> Submit Report
+                    </button>
+                    <button type="reset" class="btn-cancel">
+                        <i class="bi bi-x-circle"></i> Clear Form
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="custom-modal-overlay" id="successModal">
+            <div class="custom-modal-content">
+                <div class="custom-modal-body">
+                    <div class="success-icon-modal mb-4">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <h3 class="mb-3">Report Submitted Successfully!</h3>
+                    <p class="text-muted mb-4">Your incident report has been sent to the admin for review.</p>
+                    <button type="button" class="btn-modal-close" id="closeModalBtn">
+                        <i class="bi bi-check-lg"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User's Reports List -->
+        <div class="reports-list" id="reportsList">
+            <div class="list-header">
+                <h5><i class="bi bi-card-list"></i> My Submitted Reports</h5>
+                <div class="report-count" id="reportCount">0 Reports</div>
+            </div>
+            <div id="reportsContainer">
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <p>No reports submitted yet. Submit your first incident report above!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="#">VESSELS</a></li>
+                        <li><a href="#">PORTS</a></li>
+                        <li><a href="#">ANALYTICS</a></li>
+                        <li><a href="#">TRACKING</a></li>
+                        <li><a href="#">NEWS</a></li>
+                    </ul>
+                </nav>
+
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#">CONTACT</a>
+                    <a href="#">API DOCS</a>
+                    <a href="#">SUPPORT</a>
+                    <a href="#">PRIVACY</a>
+                    <a href="#">TERMS</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>
+                    REAL-TIME VESSEL TRACKING, CRAFTED WITH ⚓ IN THE MARITIME INDUSTRY<br>
+                    ©<span class="footer-brand">AQUATRACE</span> | ALL RIGHTS RESERVED
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ==================== SIDEBAR & NAVBAR ====================
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        document.getElementById('sidebarToggle').onclick = () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeSidebar = () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        document.getElementById('sidebarClose').onclick = closeSidebar;
+        overlay.onclick = closeSidebar;
+
+        window.onscroll = () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        };
+
+        // ==================== REPORT MANAGEMENT ====================
+        let reports = [];
+        const currentUser = 'ruzzelmae.padrones'; // This should come from session/login
+
+        const reportForm = document.getElementById('reportForm');
+        const successModal = document.getElementById('successModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        // Close modal function
+        function closeModal() {
+            successModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        closeModalBtn.onclick = closeModal;
+        successModal.onclick = (e) => {
+            if (e.target === successModal) closeModal();
+        };
+
+        // Update report count
+        function updateReportCount() {
+            const countElement = document.getElementById('reportCount');
+            const count = reports.length;
+            countElement.textContent = `${count} Report${count !== 1 ? 's' : ''}`;
+        }
+
+        // Get status badge HTML
+        function getStatusBadge(status) {
+            const statusConfig = {
+                'Pending': { class: 'status-pending', icon: 'clock' },
+                'Under Investigation': { class: 'status-investigation', icon: 'search' },
+                'Resolved': { class: 'status-resolved', icon: 'check-circle' },
+                'Closed': { class: 'status-closed', icon: 'x-circle' }
+            };
+            const config = statusConfig[status] || statusConfig['Pending'];
+            return `<span class="status-badge ${config.class}">
+                <i class="bi bi-${config.icon}"></i> ${status}
+              </span>`;
+        }
+
+        // Get severity badge HTML
+        function getSeverityBadge(severity) {
+            const severityConfig = {
+                'LOW': { class: 'severity-low', label: 'Low' },
+                'MEDIUM': { class: 'severity-medium', label: 'Medium' },
+                'HIGH': { class: 'severity-high', label: 'High' }
+            };
+            const config = severityConfig[severity] || severityConfig['LOW'];
+            return `<span class="severity-badge ${config.class}">${config.label}</span>`;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Submit report
+        reportForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const report = {
+                id: Date.now(),
+                incidentDate: document.getElementById('incidentDate').value,
+                incidentTime: document.getElementById('incidentTime').value,
+                vesselName: document.getElementById('vesselName').value,
+                portLocation: document.getElementById('portLocation').value,
+                incidentType: document.getElementById('incidentType').value,
+                severity: document.getElementById('severity').value,
+                description: document.getElementById('description').value,
+                additionalNotes: document.getElementById('additionalNotes').value,
+                status: 'Pending',
+                submittedDate: new Date().toISOString(),
+                lastUpdated: new Date().toISOString(),
+                user: currentUser
+            };
+
+            reports.unshift(report); // Add to beginning of array
+            renderReports();
+            reportForm.reset();
+
+            // Show success modal
+            successModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+
+            // Scroll to reports section
+            setTimeout(() => {
+                document.getElementById('reportsList').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        });
+
+        // Render reports
+        function renderReports() {
+            const container = document.getElementById('reportsContainer');
+            updateReportCount();
+
+            if (reports.length === 0) {
+                container.innerHTML = `
+          <div class="empty-state">
+            <i class="bi bi-inbox"></i>
+            <p>No reports submitted yet. Submit your first incident report above!</p>
+          </div>
+        `;
+                return;
+            }
+
+            container.innerHTML = reports.map(report => `
+        <div class="report-card">
+          <div class="report-header">
+            <div class="report-title">
+              <i class="bi bi-file-text"></i>
+              <h6>${report.incidentType} - ${report.vesselName}</h6>
+            </div>
+            <div class="report-status">
+              ${getStatusBadge(report.status)}
+              ${getSeverityBadge(report.severity)}
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-info">
+              <div class="info-item">
+                <i class="bi bi-calendar"></i>
+                <span><strong>Date:</strong> ${formatDate(report.incidentDate)} at ${report.incidentTime}</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-geo-alt"></i>
+                <span><strong>Location:</strong> ${report.portLocation}</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-card-text"></i>
+                <span><strong>Description:</strong> ${report.description}</span>
+              </div>
+              ${report.additionalNotes ? `
+                <div class="info-item">
+                  <i class="bi bi-info-circle"></i>
+                  <span><strong>Notes:</strong> ${report.additionalNotes}</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+          <div class="report-footer">
+            <small class="text-muted">
+              <i class="bi bi-clock-history"></i> Submitted: ${formatDate(report.submittedDate)}
+            </small>
+            <small class="text-muted">
+              <i class="bi bi-arrow-clockwise"></i> Last Updated: ${formatDate(report.lastUpdated)}
+            </small>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        // Load sample data
+        function loadSampleData() {
+            reports = [
+                {
+                    id: 1,
+                    incidentDate: '2025-11-25',
+                    incidentTime: '14:30',
+                    vesselName: 'MV Princess 21',
+                    portLocation: 'Daliao',
+                    incidentType: 'Engine Failure',
+                    severity: 'HIGH',
+                    description: 'Main engine experienced complete shutdown during docking procedure. Emergency protocols were activated immediately.',
+                    additionalNotes: 'No injuries reported. Vessel secured safely at dock.',
+                    status: 'Under Investigation',
+                    submittedDate: '2025-11-25T14:45:00',
+                    lastUpdated: '2025-11-25T16:30:00',
+                    user: currentUser
+                }
+            ];
+            renderReports();
+        }
+
+        // Initialize with sample data
+        loadSampleData();
+    </script>
+</body>
+
+</html>
